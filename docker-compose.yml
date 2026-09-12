@@ -6,18 +6,18 @@ services:
     container_name: digital_card_db
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: digital_card
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-digital_card}
     ports:
       - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U postgres']
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-digital_card}']
+      interval: 3s
+      timeout: 3s
+      retries: 10
 
   app:
     build:
@@ -26,10 +26,10 @@ services:
     container_name: digital_card_app
     restart: always
     ports:
-      - '3000:3000'
+      - '${PORT:-3000}:3000'
     environment:
-      PORT: 3000
-      DATABASE_URL: 'postgresql://postgres:postgres@db:5432/digital_card?schema=public'
+      PORT: ${PORT:-3000}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-digital_card}?schema=public
     depends_on:
       db:
         condition: service_healthy

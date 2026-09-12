@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build",
+    "build": "nest build && npx tsc prisma/seed.ts --outDir dist/prisma --module commonjs --target es2022 --moduleResolution node10 --esModuleInterop --skipLibCheck --ignoreConfig --ignoreDeprecations 6.0 --types node",
     "deploy": "nest deploy",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -55,6 +55,6 @@
     "typescript": "^6.0.2"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "node dist/prisma/seed.js"
   }
 }

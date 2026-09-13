@@ -12,8 +12,11 @@ const profileData = {
   skills: [
     'TypeScript',
     'JavaScript',
-    'HTML',
-    'CSS',
+    'Node.js',
+    'NestJS',
+    'GraphQL',
+    'PostgreSQL',
+    'Prisma ORM',
     'React',
     'Next.js',
     'Angular',
@@ -36,10 +39,6 @@ const profileData = {
     'Frontend Architecture',
     'Performance Optimization',
     'Caching Strategies',
-    'Prompt Engineering',
-    'Cursor IDE',
-    'AI-assisted Development',
-    'Claude Code',
   ],
   experiences: [
     {
